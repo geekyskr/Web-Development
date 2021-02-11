@@ -1,0 +1,1 @@
+learn about CORS (cross origin resource sharing) error.
