@@ -3,4 +3,6 @@ const app = require('./app');
 
 const port = process.env.PORT || 8080;
 const server = http.createServer(app);
-server.listen(port);
+server.listen(port, (req, res)=>{
+  console.log("Server running on port "+port);
+});
