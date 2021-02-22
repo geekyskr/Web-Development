@@ -5,21 +5,23 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+const productRoutes = require('./api/routes/products');
+const orderRoutes = require('./api/routes/orders');
 
 const mongoUserPassword = process.env.MONGO_ATLAS_PW;
 mongoose.connect('mongodb+srv://geekyskr:'+'MongodB3007'+'@node-rest-shop.2y2vu.mongodb.net/<dbname>?retryWrites=true&w=majority', {
-	useNewUrlParser: true, 
+	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
 mongoose.Promise = global.Promise;
 
-const productRoutes = require('./api/routes/products');
-const orderRoutes = require('./api/routes/orders');
 
-app.use(cors());
+
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
